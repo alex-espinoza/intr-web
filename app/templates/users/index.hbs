@@ -1,0 +1,12 @@
+<h1>Hello! This is the users index page.</h1>
+<h2>Check out all these users:</h2>
+
+<p>There are currently {{usersCount}} users.</p>
+
+<ul class="users-list">
+  {{#each user in controller}}
+    <li>{{user.id}}: {{user.email}}</li>
+  {{else}}
+    <li>There are no users</li>
+  {{/each}}
+</ul>
