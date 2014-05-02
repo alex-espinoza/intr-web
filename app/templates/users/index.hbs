@@ -5,7 +5,11 @@
 
 <ul class="users-list">
   {{#each user in controller}}
-    <li>{{user.id}}: {{user.email}}</li>
+    <li>
+      {{#link-to 'users.show' user}}
+        {{user.id}}: {{user.email}}
+      {{/link-to}}
+    </li>
   {{else}}
     <li>There are no users</li>
   {{/each}}
