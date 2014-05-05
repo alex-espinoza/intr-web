@@ -7,9 +7,9 @@
     "ember-qunit": "~0.1.5",
     "ember": "1.5.0",
     "ember-data": "1.0.0-beta.7",
+    "ember-simple-auth": "~0.3.1",
     "ember-resolver": "git://github.com/stefanpenner/ember-jj-abrams-resolver.git#master",
     "ic-ajax": "~1.x",
-    "loader": "git://github.com/stefanpenner/loader.js#1.0.0",
-    "ember-simple-auth": "https://github.com/simplabs/ember-simple-auth-component.git"
+    "loader": "git://github.com/stefanpenner/loader.js#1.0.0"
   }
 }
