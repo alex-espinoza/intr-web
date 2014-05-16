@@ -7,3 +7,12 @@
 </div>
 
 <button {{action 'save' this}}>Save</button>
+<button {{action 'delete' this}}>Delete</button>
+
+{{#if deleteMode}}
+  <div class="confirm-delete">
+    <h3>Do you really want to delete this user?</h3>
+    <button {{action 'confirmDelete' this}}>Yes</button>
+    <button {{action 'cancelDelete'}}>No</button>
+  </div>
+{{/if}}
