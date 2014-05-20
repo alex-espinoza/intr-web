@@ -7,17 +7,11 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <script>
-      window.ENV = {{ENV}};
-      document.write('<base href="' + ENV.rootURL + '" />');
-    </script>
+    {{BASE_TAG}}
 
-    <link rel="stylesheet" href="assets/app.css">
+    <link rel="stylesheet" href="assets/vendor.css">
+    <link rel="stylesheet" href="assets/intr-web.css">
     <link rel="stylesheet" href="assets/qunit.css">
-
-    <script src="assets/app.js"></script>
-    <script src="assets/tests.js"></script>
-
     <style>
       #ember-testing-container {
         position: absolute;
@@ -38,6 +32,13 @@
   <body>
     <div id="qunit"></div>
     <div id="qunit-fixture"></div>
+
+    <script>
+      window.ENV = {{ENV}};
+    </script>
+    <script src="assets/qunit.js"></script>
+    <script src="assets/intr-web.js"></script>
+    <script src="testem.js"></script>
     <script>
       require('intr-web/tests/test-helper');
       require('intr-web/tests/test-loader');

@@ -7,8 +7,6 @@
 # dependencies
 /node_modules
 /vendor/*
-!/vendor/ember-shim.js
-!/vendor/qunit-shim.js
 !/vendor/_loader.js
 
 # misc
@@ -19,5 +17,6 @@
 Thumbs.db
 /coverage/*
 npm-debug.log
+testem.log
 intr-web.sublime-project
 intr-web.sublime-workspace
