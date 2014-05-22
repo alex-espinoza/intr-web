@@ -53,13 +53,4 @@ app.import('vendor/ember-simple-auth/ember-simple-auth.js', {
   ]
 });
 
-app.import('vendor/ember-simple-auth/ember-simple-auth-devise.js', {
-  'ember-simple-auth': [
-    'Authenticator',
-    'Authorizer',
-    'Devise',
-  ]
-});
-
-
 module.exports = app.toTree();
