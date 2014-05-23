@@ -1,5 +1,5 @@
 export default Ember.Route.extend(Ember.SimpleAuth.AuthenticatedRouteMixin, {
-  model: function() {
-    return this.store.find('user');
+  model: function(params) {
+    return this.store.find('user', params.user_id);
   }
 });
