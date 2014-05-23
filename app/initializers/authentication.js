@@ -22,7 +22,7 @@ var CustomAuthenticator = Ember.SimpleAuth.Authenticators.Base.extend({
       };
       _this.makeRequest(data).then(function(response) {
         Ember.run(function() {
-          resolve({ token: response.data.user_token });
+          resolve({ token: response.data.user_token, user_id: response.data.user_id });
         });
       }, function(xhr, status, error) {
         Ember.run(function() {
@@ -80,6 +80,14 @@ export default CustomAuthorizer;
 export default {
   name: 'authentication',
   initialize: function(container, application) {
+    Ember.SimpleAuth.Session.reopen({
+      current_user: function() {
+        var userId = this.get('user_id');
+        if (!Ember.isEmpty(userId)) {
+          return container.lookup('store:main').find('user', userId);
+        }
+      }.property('userId')
+    });
     container.register('authenticators:custom', CustomAuthenticator);
     container.register('authorizer:custom', CustomAuthorizer);
     Ember.SimpleAuth.setup(container, application, {
