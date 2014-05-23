@@ -4,7 +4,7 @@ var CustomAuthenticator = Ember.SimpleAuth.Authenticators.Base.extend({
 
   restore: function(properties) {
     return new Ember.RSVP.Promise(function(resolve, reject) {
-      if (!Ember.isEmpty(properties.auth_token) && !Ember.isEmpty(properties.auth_email)) {
+      if (!Ember.isEmpty(properties.token)) {
         resolve(properties);
       } else {
         reject();
@@ -22,18 +22,31 @@ var CustomAuthenticator = Ember.SimpleAuth.Authenticators.Base.extend({
       };
       _this.makeRequest(data).then(function(response) {
         Ember.run(function() {
-          resolve(response);
+          resolve({ token: response.data.user_token });
         });
       }, function(xhr, status, error) {
         Ember.run(function() {
-          reject(xhr.responseJSON || xhr.responseText);
+          var response = JSON.parse(xhr.responseText);
+          reject(response.message);
         });
       });
     });
   },
 
   invalidate: function() {
-    return Ember.RSVP.resolve();
+    var _this = this;
+    return new Ember.RSVP.Promise(function(resolve) {
+      Ember.$.ajax({
+        url: _this.serverTokenEndpoint,
+        type: 'DELETE',
+        contentType: 'application/json',
+        beforeSend: function(xhr, settings) {
+          xhr.setRequestHeader('Accept', settings.accepts.json);
+        }
+      }).then(function() {
+        resolve();
+      });
+    });
   },
 
   makeRequest: function(data, resolve, reject) {
@@ -54,10 +67,23 @@ var CustomAuthenticator = Ember.SimpleAuth.Authenticators.Base.extend({
 
 export default CustomAuthenticator;
 
+var CustomAuthorizer = Ember.SimpleAuth.Authorizers.Base.extend({
+  authorize: function(jqXHR, requestOptions) {
+    if (this.get('session.isAuthenticated') && !Ember.isEmpty(this.get('session.token'))) {
+      jqXHR.setRequestHeader('Authorization', 'Token: ' + this.get('session.token'));
+    }
+  }
+});
+
+export default CustomAuthorizer;
+
 export default {
   name: 'authentication',
   initialize: function(container, application) {
     container.register('authenticators:custom', CustomAuthenticator);
-    Ember.SimpleAuth.setup(container, application);
+    container.register('authorizer:custom', CustomAuthorizer);
+    Ember.SimpleAuth.setup(container, application, {
+      authorizerFactory: 'authorizer:custom'
+    });
   }
 };
