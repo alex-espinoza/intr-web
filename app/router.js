@@ -8,6 +8,7 @@ Router.map(function() {
     this.route('edit', { path: ':user_id/edit' });
     this.route('new');
   });
+  this.resource('login');
 });
 
 export default Router;

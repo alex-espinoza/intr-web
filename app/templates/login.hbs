@@ -1,0 +1,22 @@
+<div class="sign-in-form">
+  {{#if errorMessage}}
+  <div class="sign-in-form-error-message">
+    <strong>Login failed:</strong> {{errorMessage}}
+  </div>
+  {{/if}}
+  <form {{action "authenticate" on="submit"}} role="form">
+    <fieldset>
+      <div class="sign-in-group">
+        <label for="identification">Email</label>
+        {{input type="text" class="form-control" id="identification" value=identification}}
+      </div>
+
+      <div class="sign-in-group">
+        <label for="password">Password</label>
+        {{input type="password" class="form-control" id="password" value=password}}
+      </div>
+
+      <button class="sign-in-button" type="submit">Sign In</button>
+    </fieldset>
+  </form>
+</div>
