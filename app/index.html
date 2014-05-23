@@ -9,14 +9,13 @@
 
     {{BASE_TAG}}
 
-    <link rel="stylesheet" href="assets/vendor.css">
-    <link rel="stylesheet" href="assets/intr-web.css">
+    <link rel="stylesheet" href="assets/app.css">
   </head>
   <body>
     <script>
       window.ENV = {{ENV}};
     </script>
-    <script src="assets/intr-web.js"></script>
+    <script src="assets/app.js"></script>
     <script>
       window.IntrWeb = require('intr-web/app')['default'].create(ENV.APP);
     </script>

@@ -39,7 +39,7 @@
     "isolatedContainer",
     "startApp",
     "andThen",
-    "currentURL",
+    "currentUrl",
     "currentPath",
     "currentRouteName"
   ],
