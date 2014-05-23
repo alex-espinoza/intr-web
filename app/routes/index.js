@@ -1,5 +1,1 @@
-export default Ember.Route.extend({
-  redirect: function() {
-    this.transitionTo('users');
-  }
-});
+export default Ember.Route.extend();
